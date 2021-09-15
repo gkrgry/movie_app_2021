@@ -2,10 +2,12 @@
 
 const foodLike = [
   {
+    id: 1,
     name: "chikin",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU2VIPw7JbEM8zeFPd9Llveo8Io2jINQoiHg&usqp=CAU"
   },
   {
+    id: 2,
     name: "lameyn",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqZZWRIyHxRCTzh93aDrt7inRRh9tRlKYGWw&usqp=CAU"
   }
@@ -25,19 +27,19 @@ function App() {
       {
         // foodLike.map(renderFood)
 
-        foodLike.map(dish => (<Food name={dish.name} image={dish.image} />))
+        foodLike.map(dish => (<Food key={dish.id} name={dish.name} picture={dish.image} />))
         
       }
     </div>
   );
 }
 
-function Food(props){
+function Food({name, picture}/*props*/){
   // console.log(props);
   // const { fav} = name
   return  (<div>
-  <h1>I like {props.name} </h1> 
-  <img src={props.image} />
+  <h1>I like {name} </h1> 
+  <img src={picture} />
   </div>)
   
 
