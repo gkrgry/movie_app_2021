@@ -1,15 +1,19 @@
-
+import PropType from 'prop-types'
 
 const foodLike = [
   {
     id: 1,
-    name: "chikin",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU2VIPw7JbEM8zeFPd9Llveo8Io2jINQoiHg&usqp=CAU"
+    name: "dosirack",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU2VIPw7JbEM8zeFPd9Llveo8Io2jINQoiHg&usqp=CAU",
+    alt: '도시락',
+    rating: 5.0
   },
   {
     id: 2,
-    name: "lameyn",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqZZWRIyHxRCTzh93aDrt7inRRh9tRlKYGWw&usqp=CAU"
+    name: "lice",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqZZWRIyHxRCTzh93aDrt7inRRh9tRlKYGWw&usqp=CAU",
+    alt: 'lice',
+    rating: 4.5
   }
 
 ]
@@ -27,7 +31,12 @@ function App() {
       {
         // foodLike.map(renderFood)
 
-        foodLike.map(dish => (<Food key={dish.id} name={dish.name} picture={dish.image} />))
+        foodLike.map(dish => (<Food key={dish.id}
+          name={dish.name}
+          picture={dish.image}
+          alt={dish.alt}
+          rating={dish.rating}
+          />))
         
       }
     </div>
