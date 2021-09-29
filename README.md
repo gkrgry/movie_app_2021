@@ -7,11 +7,11 @@
 
 생명주기 함수 <br>
 ```
-<     컴포넌트 생성     ><  생성직후       >
-constructor -> render -> componentDidMount
+<     컴포넌트 생성     ><      생성직후       >
+constructor ->      render-> componentDidMount
 
-< props/state의 변화 ><    update 처리              > <  처리 직후     >
-                      shouldComponentUpdate render  componentDidUpdate
+< props/state의 변화 ><        update 처리              ><  처리 직후     >
+    없어진메소드?      ->  shouldComponentUpdate render -> componentDidUpdate
 
 <    컴포넌트 제거  >
 componentWillUnmount
