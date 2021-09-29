@@ -5,7 +5,8 @@
 정적엔 PropType
 동적엔 state
 
-생명주기 함수
+생명주기 함수 <br>
+```
 <     컴포넌트 생성     ><  생성직후       >
 constructor -> render -> componentDidMount
 
@@ -14,6 +15,7 @@ constructor -> render -> componentDidMount
 
 <    컴포넌트 제거  >
 componentWillUnmount
+```
 
 return 값에 태그 하나만 들어갈 수 있지만 div 태그로 여러 넣음
 ```
