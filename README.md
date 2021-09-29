@@ -1,5 +1,40 @@
 # 강태규 201740102
 
+## [09월 29일]
+#### 학습내용
+정적엔 PropType
+동적엔 state
+
+생명주기 함수
+<     컴포넌트 생성     ><  생성직후       >
+constructor -> render -> componentDidMount
+
+< props/state의 변화 ><    update 처리              > <  처리 직후     >
+                      shouldComponentUpdate render  componentDidUpdate
+
+<    컴포넌트 제거  >
+componentWillUnmount
+
+return 값에 태그 하나만 들어갈 수 있지만 div 태그로 여러 넣음
+```
+render(){
+      console.log("render");
+    return (
+        <div>
+            
+        <h1>The number is: {this.state.count} </h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+        </div> 
+    )
+  }
+}
+
+```
+
+
+
+
 ## [09월 15일]
 #### 학습내용
 id 값을 넣어 유일성을 확보하는 key props 방법
