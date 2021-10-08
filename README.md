@@ -1,5 +1,28 @@
 # 강태규 201740102
 
+## [10월 06일]
+#### 학습내용
+axios 설치
+npm install axios
+
+https://yts.mx/api
+영화관련 API 사이트 내용중 토랜트 관련 불법이 있다.
+
+```
+render() {
+    const {isLoading} = this.state
+    return(
+      <div>
+        { isLoading ? 'Loading....' : '영화 데이터 출력' }
+        </div>
+    )
+  }
+```
+삼항 연산자 를 이용하여 isLoading 함수로 로딩중인지 확인하는 함수
+트루면 'Loading....' 출력 아니면 '영화 데이터 출력' 출력
+
+
+
 ## [09월 29일]
 #### 학습내용
 정적엔 PropType
