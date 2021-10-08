@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "axios"
 
 class App extends React.Component{
   state = {
@@ -6,10 +7,20 @@ class App extends React.Component{
     movies: []
   }
 
+  getMovies = async () => {
+    const {
+        data: {
+            data: {
+                movies
+            }
+        }
+    } = await axios.get("https://yts.mx/api/v2/list_movies.json")
+    // const movies 
+    console.log(movies);
+  }
+
   componentDidMount(){
-      setTimeout(() =>{
-          this.setState({ isLoading: false})
-      },6000)  
+      this.getMovies()
   }
 
   render() {
