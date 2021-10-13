@@ -1,4 +1,98 @@
 # 강태규 201740102
+## [10월 13일]
+#### 학습내용
+프록시 서버 : 서버와 클라이언트 사이에 있는 또다른 서버
+
+코딩시 표기법
+```
+//첫문자 첫글자 소문자 다음 문자부터 첫글자 대문자
+//카멜 표기법: 변수명, 함수명에 사용
+camelCase
+//파스칼 표기법: 클래스명 가끔 함수명에 사용
+//모든 문자 첫글에 대문자
+PascalCase
+//모든 문자는 소문자 사용 문자 사이에 '_'(언더바) 이어서 사용
+snake_case
+```
+
+movie.js 
+```jsx
+import PropTypes from 'prop-types'
+import "./Movie.css"
+
+
+function Movie({title ,year ,summary ,poster, genres}) {
+    return(
+        <div className='movie'>
+         <img src={poster} alt={title} title={title}/>
+         <div className='movie-data'>
+             <h3 className='movie-title'>{title}</h3>
+             <h5 className='movie-year'>{year}</h5>
+             <p className='moive-summary'>{summary}</p>
+             
+         </div>
+        </div>
+    )
+}
+// propTypes 소문자 주의!
+// Proptypes는 impoet한건데 propTypes는 어디서 정의된건지 모르겠다 내장 함수인가?
+Movie.propTypes = {
+    year: PropTypes.number.isRequired, 
+    //import 한 Proptypes 안에 number인 year을 필수로 가져와라
+    title: PropTypes.string.isRequired,
+    summary:PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    genres: PropTypes.arrayOf(PropTypes.string).isRequired
+    //배열로 저장된 정보를 가져오기
+}
+
+export default Movie
+```
+
+App.js 안에 render 함수
+Moive.js에서 가져온 정보 뿌려주기
+```jsx
+render() {
+    const {isLoading, movies} = this.state
+    return( 
+      <section className='container'>
+        { isLoading ?( //삼함 연산자 로딩중이라면
+          <div className='loader'>
+            <span className='loader-text'>Loading...</span>
+            //참일때 Loading...
+          </div>
+        ) : ( //여기서부터 로딩중이 아니면 
+          <div className='movies'>
+            {
+               movies.map((movie) =>{ 
+                console.log(movie); 
+                //소문자로 된 movie 가 어디서 정의된건지 모르겠다. import Movie 인가? 확실치 않아 주석남김
+                return( 
+                <Movie
+                  key = {movie.id}
+                  id = {movie.id}
+                  year = {movie.year}
+                  title = {movie.title}
+                  summary = {movie.summary}
+                  poster = {movie.medium_cover_image}
+                  genres = {movie.genres}
+                  />
+                )})
+            }
+          </div>
+        ) 
+        }
+        </section>
+    )
+  }
+
+}
+```
+
+
+
+
+
 
 ## [10월 06일]
 #### 학습내용
@@ -8,7 +102,7 @@ npm install axios
 https://yts.mx/api
 영화관련 API 사이트 내용중 토랜트 관련 불법이 있다.
 
-```
+```jsx
 render() {
     const {isLoading} = this.state
     return(
@@ -41,7 +135,7 @@ componentWillUnmount
 ```
 
 return 값에 태그 하나만 들어갈 수 있지만 div 태그로 여러 넣음
-```
+```jsx
 render(){
       console.log("render");
     return (
@@ -63,7 +157,7 @@ render(){
 ## [09월 15일]
 #### 학습내용
 id 값을 넣어 유일성을 확보하는 key props 방법
-```
+```jsx
 const foodLike = [
   {
     id: 1,
@@ -79,7 +173,7 @@ const foodLike = [
 ]
 ```
 Food 함수의 매개변수에 대가로 넣고 ({name, picture})를 쓸경우
-```
+```jsx
 function Food({name, picture}/){
 
   return  (<div>
@@ -89,7 +183,7 @@ function Food({name, picture}/){
 }
 ```
 Food 함수의 매개변수에 대가로 안넣고 (props)를 쓸경우
-```
+```jsx
 function Food(props){
 
 return (<h1>I like {props.fav}</h1>)
@@ -107,14 +201,14 @@ npx create-react-app 파일명 (간단한 리엑트 파일 생성)
  App.js 파일을 고치면 화면에 뜨는 이유
 
 ###### index.html
-```
+```jsx
 <div id="Potato"></div>
 );
 ```
 아이디가 Potato인 값을 div 에 불러오라
 
 ###### index.js
-```
+```jsx
 ReactDOM.render(
     <App /> ,document.getElementById('Potato')
 );
@@ -123,7 +217,7 @@ ReactDOM.render(
 Potato 란 요소에 App 함수를 집어 넣어라
 
 ###### App.js
-```
+```jsx
 function App() {
   return (
     <div className="App">
