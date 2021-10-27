@@ -1,4 +1,66 @@
 # 강태규 201740102
+## [10월 27일]
+#### 학습내용
+
+React-Router는 페이지를 새로 불러오지 않는 상황에서
+각각의 선택에 따라서 선택된 데이터를 하나의 페이지에서
+렌더링 해주는 라이브러리 입니다.
+
+라우터 하는법
+
+```jsx
+import "./App.css"
+import { HashRouter, Route} from 'react-router-dom'
+import About from './routes/About'
+import Home from "./routes/Home"
+
+function App() {
+  return(
+    <HashRouter> //exact 는 오직 '/' 일때만 없으면 '/' 포함된것 모두 출현
+      <Route path='/' exact={true} component={Home}>
+      </Route>
+      <Route path='/about' component={About}>
+      </Route>
+    </HashRouter>
+  )
+}
+
+export default App;
+```
+
+라우터 설치
+react-router-dom
+보통 간단한 메뉴 만들때 설치
+
+app.css , movie.css 파일 가져오기
+```
+https://github.com/easysIT
+```
+
+movie.js 장르 추가
+```jsx
+function Movie({title ,year ,summary ,poster, genres}) {
+    return(
+        <div className='movie'>
+         <img src={poster} alt={title} title={title}/>
+         <div className='movie-data'>
+             <h3 className='movie-title'>{title}</h3>
+             <h5 className='movie-year'>{year}</h5>
+             <ul className='movie-genres'> //장르 가져오기
+                {genres.map((genre,index) => { //map 함수는 배열 가져올 수 있다.
+                    return( // index는 키값
+                    <li key={index} className='movie-genre'>{genre}</li>
+                    )
+                })}
+             </ul>
+             <p className='moive-summary'>{summary.slice(0,180)}...</p>
+             
+         </div>
+        </div>
+    )
+}
+```
+
 ## [10월 13일]
 #### 학습내용
 프록시 서버 : 서버와 클라이언트 사이에 있는 또다른 서버
