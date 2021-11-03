@@ -1,4 +1,92 @@
 # 강태규 201740102
+
+## [11월 03일]
+#### 학습내용
+
+생명주기 함수를 이용한 리다이렉트 코딩
+Detail.js 
+```jsx
+class Detail extends React.Component{
+    componentDidMount(){ //render() 이후
+        const{ location, history } = this.props
+        if(location.state === undefined){
+            history.push('/') //값이 없다면 홈으로 가라는 리다이렉트 기능
+        }
+    }
+    render(){
+        const { location } = this.props // 바인딩 해서 가져온 값 뿌리기
+        if(location.state){ //값이 있으면
+            return(
+                <span>{location.state.title}</span>
+            )
+        }
+        else{ //location.state 값이 없으면 
+            return null //DidMount 쪽으로 가서 리다이랙트
+        }
+    }
+}
+
+```
+
+변수에 내용 저장해서 보내기
+jsp에서 바인딩과 비슷해 보임
+App.js
+```jsx
+function App() {
+  return(
+    <HashRouter>
+      <Navigation/>
+      <Route path='/' exact={true} component={Home}>
+      </Route>
+      <Route path='/about' component={About}>
+      </Route>
+      <Route path='/movie-detail' component={Detail}> //movie-detail 인 url로 Detail 변수로 뿌려주기
+      </Route>
+    </HashRouter>
+  )
+}
+```
+
+movie.js
+```jsx
+function Movie({title ,year ,summary ,poster, genres}) {
+    return(
+        <div className='movie'>
+        <Link 
+            to={{
+                pathname: 'movie-detail', //movie-detail 로 이동
+                state: {year, title, summary, poster, genres} // state 형식으로 내용 넣고 보내기
+                }}>
+         <img src={poster} alt={title} title={title}/>
+         <div className='movie-data'>
+             <h3 className='movie-title'>{title}</h3>
+             <h5 className='movie-year'>{year}</h5>
+             <ul className='movie-genres'>
+                {genres.map((genre,index) => {
+                    return(
+                    <li key={index} className='movie-genre'>{genre}</li>
+                    )
+                })}
+             </ul>
+             <p className='moive-summary'>{summary.slice(0,180)}...</p>
+             
+         </div>
+         </Link>
+        </div>
+    )
+}
+```
+
+package.json 과 package-lock.json 차이
+```
+이상적인 npm install은 동일한 package.json에 동일한 node_modules 아웃풋 트리가 작성되는 것 이지만
+그러나, 많은 경우에서 이러한 경우들이 실현되지 못하는 경우가 대부분이다
+node_modules 폴더의 의존성 트리 구조를 기록하는 파일이 package-lock.json 파일
+```
+
+
+
+
 ## [10월 27일]
 #### 학습내용
 
@@ -34,7 +122,7 @@ react-router-dom
 
 app.css , movie.css 파일 가져오기
 ```
-https://github.com/easysIT
+  https://github.com/easysIT
 ```
 
 movie.js 장르 추가
