@@ -1,5 +1,25 @@
 # 강태규 201740102
 
+## [11월 10일]
+#### 학습내용
+실질적으로 베포!
+npm install gh-pages 하고
+npm run build 하면 build 파일 생성후 깃허브에 올라가는거 확인 후 베포끝
+
+package.json 파일 추가
+```jsx
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build", //추가
+    "deploy": "gh-pages -d build" //추가
+  }
+```
+package.json 파일
+```jsx
+//마지막 전에 추가
+"homepage": "https://gkrgry.github.io/movie_app_2021" //깃허브 아이디.github.io/레포지토리 이름
+```
 ## [11월 03일]
 #### 학습내용
 
