@@ -1,5 +1,143 @@
 # 강태규 201740102
 
+## [12월 01일]
+#### 학습내용
+###### 조건부 랜더링
+React에서는 원하는 동작을 캡슐화하는 컴포넌트를 만들 수 있다. 이렇게 하면 애플리케이션의 상태에 따라서 컴포넌트 중 몇 개만을 렌더링할 수 있다.
+
+- 엘리먼트 변수
+엘리먼트를 저장하기 위해 변수를 사용할 수 있습니다. 출력의 다른 부분은 변하지 않은 채로 컴포넌트의 일부를 조건부로 렌더링 할 수 있습니다.
+
+-논리 && 연산자로 If를 인라인으로 표현하기
+JSX 안에는 중괄호를 이용해서 표현식을 포함 할 수 있다
+```jsx
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 && //이부분
+        <h2>
+          You have {unreadMessages.length} unread messages. //이부분
+        </h2>
+      }
+    </div>
+  );
+}
+```
+
+###### React 이벤트 처리
+엘리먼트에서 이벤트를 처리하는 방식은 DOM 엘리먼트에서 이벤트를 처리하는 방식과 매우 유사하다.
+
+###### 데이터는 아래로 흐릅니다.
+부모 컴퍼넌트에서 자식으로 데이터가 흘러간다.
+
+컴포넌트는 자신의 state를 자식 컴포넌트에 props로 전달할 수 있습니다.
+###### state 업데이트는 병합됩니다.
+setState()를 호출할 때 React는 제공한 객체를 현재 state로 병합합니다
+
+
+###### state를 올바르게 사용하기
+- 직접 state를 수정하지 말기
+```jsx
+this.state.comment = 'Hello';//이렇게 하지 마세요
+```
+```jsx
+this.setState({comment: 'Hello'}); //이렇게 하세요 느낌은 java primary 변수 getter,setter 해주는 느낌
+```
+- state 업데이트는 비동기적일 수도 있다.
+
+React는 성능을 위해 여러 setState() 호출을 단일 업데이트로 한꺼번에 처리할 수 있습니다.
+
+this.props와 this.state가 비동기적으로 업데이트될 수 있기 때문에 다음 state를 계산할 때 해당 값에 의존해서는 안 됩니다.
+
+###### 클래스에 로컬 State 추가하기
+- render() 메서드 안에 있는 this.props.date를 this.state.date로 변경합니다.
+- 초기 this.state를 지정하는 class constructor를 추가합니다.
+- 요소에서 date prop을 삭제합니다.
+```jsx
+class Clock extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+```
+바뀐 후
+```jsx
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Clock />,
+  document.getElementById('root')
+);
+```
+
+###### 다섯단계로 함수 컴포넌트를 클래스로 변화 가능
+- React.Component를 확장하는 동일한 이름의 ES6 class를 생성합니다.
+- render()라고 불리는 빈 메서드를 추가합니다.
+- 함수의 내용을 render() 메서드 안으로 옮깁니다.
+- render() 내용 안에 있는 props를 this.props로 변경합니다.
+```jsx
+class Clock extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {/*여기에 this*/this.props.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+```
+
+## [11월 24일]
+#### 학습내용
+
+  
+  jsx 란 js를 확장한 문법
+  ```jsx
+  const element = <h1>Hello, world!</h1>;
+  ```
+  jsx 는 표현식
+  jsx 는 자식을 포함할 수 있습니다.
+  JSX는 객체를 표현합니다
+  위 특징들의 대한 간단한 코드들은
+  https://ko.reactjs.org/docs/introducing-jsx.html 
+  
+  
+  엘리먼트 는 react 에서 가장 작은 단위
+  ```jsx
+  <div id="root"></div>
+  ```
+
+
+  컴포넌트 정의 가장 간단한 방법 js 함수를 작성하는것
+  ```jsx
+  function Welcome(props) {
+    return <h1>Hello, {props.name}</h1>;
+  }
+
+  ```
+
 ## [11월 17일]
 #### 학습내용
 
