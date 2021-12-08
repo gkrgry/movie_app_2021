@@ -1,5 +1,169 @@
 # 강태규 201740102
 
+## [12월 08일]
+#### 학습내용
+
+#### 합성 (Composition) vs 상속 (Inheritance)
+React는 강력한 합성 모델을 가지고 있으며, 상속 대신 합성을 사용하여 컴포넌트 간에 코드를 재사용하는 것이 좋습니다.
+
+```jsx
+function FancyBorder(props) {
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color}>
+      {props.children}
+    </div>
+  );
+} 
+```
+이러한 방식으로 다른 컴포넌트에서 JSX를 중첩하여 임의의 자식을 전달할 수 있습니다.
+```jsx
+function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+        Welcome
+      </h1>
+      <p className="Dialog-message">
+        Thank you for visiting our spacecraft!
+      </p>
+    </FancyBorder>
+  );
+}
+```
+
+##### 특수화
+
+
+#### state 끌어올리기 (lifting-state-up)
+자식에 있는 state를 부모로 올리는 것
+
+
+
+#### Form
+- HTML 폼 엘리먼트는 폼 엘리먼트 자체가 내부 상태를 가지기 때문에, React의 다른 DOM 엘리먼트와 다르게 동작합니다.
+
+##### textarea
+React에서 textarea는 value 어트리뷰트를 대신 사용합니다. 이렇게하면 textarea 를 사용하는 폼은 한 줄 입력을 사용하는 폼과 비슷하게 작성할 수 있습니다.
+```jsx
+class EssayForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'Please write an essay about your favorite DOM element.'
+    };//부분
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }//부분
+
+  handleSubmit(event) {
+    alert('An essay was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Essay:
+          <textarea value={this.state.value} onChange={this.handleChange} />//부분
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+```
+
+
+##### select
+```jsx
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'coconut'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Pick your favorite flavor:
+          <select value={this.state.value} onChange={this.handleChange}>//이부분
+            <option value="grapefruit">Grapefruit</option>
+            <option value="lime">Lime</option>
+            <option value="coconut">Coconut</option>
+            <option value="mango">Mango</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+```
+
+##### 다중 입력 제어하기
+여러 input 엘리먼트를 제어해야할 때, 각 엘리먼트에 name 어트리뷰트를 추가하고 event.target.name 값을 통해 핸들러가 어떤 작업을 할 지 선택할 수 있게 해줍니다
+
+
+
+#### Key
+- Key는 React가 어떤 항목을 변경, 추가 또는 삭제할지 식별하는 것을 돕습니다
+- key는 엘리먼트에 안정적인 고유성을 부여하기 위해 배열 내부의 엘리먼트에 지정해한다.
+- 일반적으로 항목이 고정적일 경우는 배열의 index값을 사용한다
+- 다만 항목의 순서가 바뀔 수 있는 경우는 index사용을 권장하지 않는다
+- 이 것 때문에 성능이 저하되거나 컴포넌트의 state와 관련된 문제가 발생될 수 있다.
+
+Key 로 컴포넌트 추출하기
+```jsx
+function ListItem(props) {
+  const value = props.value;
+  return (
+    // 틀렸습니다! 여기에는 key를 지정할 필요가 없습니다.
+    <li key={value.toString()}>
+      {value}
+    </li>
+  );
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    // 틀렸습니다! 여기에 key를 지정해야 합니다.
+    <ListItem value={number} />
+  );
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.getElementById('root')
+);
+```
+map() 함수 내부에 있는 엘리먼트에 key를 넣어 주는 게 좋다
+
+
+###### Key는 배열내 요소 사이에서만 고융한 값이면 된다.
+- Key는 배열 안에서 형제 사이에서 고유해야 하고 전체 범위에서 고유할 필요가 없다. 두개의 다른 배열을 만들때 동일한 key값을 사용할 수 있다.
+###### JSX에 map() 포함시키기
+- 이 방식을 사용하면 코드가 더 깔끔해 지지만, 이 방식을 남발하는 것은 좋지 않습니다.
+
+
+
 ## [12월 01일]
 #### 학습내용
 ###### 조건부 랜더링
