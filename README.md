@@ -32,11 +32,16 @@ function WelcomeDialog() {
 ```
 
 ##### 특수화
-
+- 경우에 따라 어떤 컴포넌트는 “특수한 경우”를 고려해야 하는 경우가 있습니다. 예를
+들어, WelcomeDialog는 Dialog의 특수한 경우라고 할 수 있다
+-React에서는 이 역시 합성을 통해 해결할 수 있다.
 
 #### state 끌어올리기 (lifting-state-up)
-자식에 있는 state를 부모로 올리는 것
-
+- React에서 state를 공유하는 일은 그 값을 필요로 하는 컴포넌트 간의 가장 가까운
+공통 조상으로 state를 끌어올림으로써 구현할 수 있습니다. 이 방법을 “state 끌어올
+리기”라고 부른다.
+- 이제 TemperatureInput이 개별적으로 가지고 있던 지역 state를 지우는 대신
+Calculator로 그 값을 옮기도록 한다.
 
 
 #### Form
